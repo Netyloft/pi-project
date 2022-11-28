@@ -1,0 +1,35 @@
+
+server:
+  port: ${PORT:8080}
+
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/pi_project}
+    username: ${DATASOURCE_USERNAME:postgres}
+    password: ${DATASOURCE_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      minimumIdle: 1
+      maximumPoolSize: 10
+      idleTimeout: 20000
+      auto-commit: false
+    name: PostgresDatasource
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: update  # create-drop / none / validate
+    properties:
+      hibernate:
+        id.new_generator_mappings: true
+        connection.provider_disables_autocommit: true
+        cache.use_second_level_cache: false
+        cache.use_query_cache: false
+        generate_statistics: true
+        jdbc.time_zone: UTC
+        format_sql: false
+        use_sql: false
+        temp.use_jdbc_metadata_defaults: # Disabling contextual LOB creation as createClob() method threw error
+  sql:
+    init:
+      platform: postgres
