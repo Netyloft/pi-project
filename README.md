@@ -1,7 +1,6 @@
 Для запуска очень желательно иметь IntelliJ IDEA Ultimate, но в теории подойдёт и Comunity версия
 
 Стек + настройка:
-0) Spring boot
 
 JAVA 17, PostgreSQL 13+
 
