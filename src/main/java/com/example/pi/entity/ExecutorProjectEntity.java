@@ -1,7 +1,8 @@
 package com.example.pi.entity;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,14 +10,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "organization")
+@Table(name = "executor_project")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class OrganizationEntity extends BaseEntity {
+public class ExecutorProjectEntity extends BaseEntity{
 
-    @Column(name = "name", nullable = false)
-    private String name;
+    @OneToOne
+    @JoinColumn(name = "organization_id")
+    private OrganizationEntity organization;
 
 }
