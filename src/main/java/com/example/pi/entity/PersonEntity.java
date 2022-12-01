@@ -23,10 +23,11 @@ public class PersonEntity extends BaseEntity {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "role")
-    private String role;
-
     @ManyToOne
     @JoinColumn(name = "organization_id", nullable = false)
     private OrganizationEntity organization;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false)
+    private RoleEntity role;
 }
