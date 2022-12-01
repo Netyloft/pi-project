@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 
 @Entity
@@ -21,10 +21,10 @@ public class MeetingEntity extends BaseEntity{
     private String name;
 
     @Column(name = "from_date")
-    private Date fromDate;
+    private Timestamp fromDate;
 
     @Column(name = "to_date")
-    private Date toDate;
+    private Timestamp toDate;
 
     @Column(name = "place")
     private String place;
