@@ -2,8 +2,7 @@ package com.example.pi.controller;
 
 import com.example.pi.Constants;
 import com.example.pi.entity.MeetingParticipantEntity;
-import com.example.pi.entity.OrganizationEntity;
-import com.example.pi.repository.OrganizationRepository;
+import com.example.pi.repository.MeetingParticipantRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(Constants.BASE_API + "/meeting-participant")
 public class MeetingParticipantController extends BaseController<MeetingParticipantEntity, MeetingParticipantRepository>{
 
-    public MeetingParticipantControllerMeetingParticipantRepository repository) {
+    public MeetingParticipantController(MeetingParticipantRepository repository) {
         super(repository);
     }
 }
