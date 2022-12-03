@@ -2,6 +2,7 @@ package com.example.pi.controller;
 
 import com.example.pi.entity.BaseEntity;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,8 +28,13 @@ public class BaseController<Ent extends BaseEntity, Rep extends JpaRepository<En
         return repository.save(entity);
     }
 
+    @SneakyThrows
     @PutMapping("")
     public Ent update(@RequestBody Ent entity) {
+
+        if(entity.getId() == null)
+            throw new Exception("Поле id не может быть пустым");
+
         return repository.save(entity);
     }
 
