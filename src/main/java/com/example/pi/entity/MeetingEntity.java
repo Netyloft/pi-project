@@ -1,6 +1,6 @@
 package com.example.pi.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,5 +31,5 @@ public class MeetingEntity extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "person_id")
-    private PersonEntity initiator;
+    private UserEntity initiator;
 }

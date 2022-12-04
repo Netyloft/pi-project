@@ -1,13 +1,14 @@
 package com.example.pi.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "project_participant")
@@ -15,11 +16,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class ProjectParticipantEntity extends BaseEntity{
+public class ProjectParticipantEntity extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "person_details_id")
-    private PersonDetailsEntity personDetails;
+    private UserDetailsEntity personDetails;
 
     @ManyToOne
     @JoinColumn(name = "project_id")

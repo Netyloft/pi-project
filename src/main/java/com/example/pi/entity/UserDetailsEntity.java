@@ -1,10 +1,11 @@
 package com.example.pi.entity;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "person_details")
@@ -12,11 +13,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class PersonDetailsEntity extends BaseEntity {
+public class UserDetailsEntity extends BaseEntity {
 
     @OneToOne
     @JoinColumn(name = "person_id")
-    private PersonEntity person;
+    private UserEntity person;
 
     @Column(name = "name", nullable = false)
     private String name;

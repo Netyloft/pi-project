@@ -33,3 +33,7 @@ spring:
   sql:
     init:
       platform: postgres
+
+jwt:
+  sessionTime: 3600000
+  secret: secret_key

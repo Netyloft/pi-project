@@ -1,10 +1,12 @@
 package com.example.pi.entity;
 
-import jakarta.persistence.*;
+import com.example.pi.domen.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "person")
@@ -12,7 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class PersonEntity extends BaseEntity {
+public class UserEntity extends BaseEntity {
 
     @Column(name = "login", unique = true, nullable = false)
     private String login;
@@ -27,7 +29,7 @@ public class PersonEntity extends BaseEntity {
     @JoinColumn(name = "organization_id", nullable = false)
     private OrganizationEntity organization;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id", nullable = false)
-    private RoleEntity role;
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    private Role role;
 }
