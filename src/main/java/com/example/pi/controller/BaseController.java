@@ -2,6 +2,9 @@ package com.example.pi.controller;
 
 import com.example.pi.dao.BaseDao;
 import com.example.pi.entity.BaseEntity;
+import com.example.pi.filter.Filter;
+import com.example.pi.filter.internal.Comparison;
+import com.example.pi.filter.internal.Condition;
 import com.example.pi.repository.BaseRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -18,13 +21,30 @@ public abstract class BaseController<Ent extends BaseEntity, Dao extends BaseDao
 
     @GetMapping("")
     public List<Ent> getAll(@RequestParam(required = false) Map<String, String> qparams) {
-//        Filter filter = new Filter();
-//
-//        qparams.forEach((name, value) -> filter.addCondition(new Condition.Builder().setComparison(Comparison.eq).setField(name).setValue(value).build()));
+        if (qparams.size() == 0) {
+            return repository.getAll();
+        }
 
+        Comparison comparison = Comparison.eq;
 
-//        return repository.getAll(filter);
-        return repository.getAll();
+        if (qparams.containsKey("comparison")) {
+            switch (qparams.get("comparison")) {
+                case "eq":
+                    comparison = Comparison.eq;
+                    break;
+                case "gt":
+                    comparison = Comparison.gt;
+                    break;
+            }
+            qparams.remove("comparison");
+        }
+
+        Filter filter = new Filter();
+
+        Comparison finalComparison = comparison;
+        qparams.forEach((name, value) -> filter.addCondition(new Condition.Builder().setComparison(finalComparison).setField(name).setValue(value).build()));
+
+        return repository.getAll(filter);
     }
 
     @GetMapping("/{id}")

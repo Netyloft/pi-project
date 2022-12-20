@@ -3,6 +3,7 @@ package com.example.pi.repository;
 import com.example.pi.common.exeption.BadRequestException;
 import com.example.pi.dao.BaseDao;
 import com.example.pi.entity.BaseEntity;
+import com.example.pi.filter.Filter;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 
@@ -15,6 +16,10 @@ public class BaseRepository<Ent extends BaseEntity, Dao extends BaseDao<Ent>> {
 
     public List<Ent> getAll() {
         return dao.findAll();
+    }
+
+    public List<Ent> getAll(Filter filter) {
+        return dao.findAll(filter);
     }
 
     public Ent get(long id) {

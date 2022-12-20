@@ -3,10 +3,7 @@ package com.example.pi.filter;
 import com.example.pi.filter.internal.Condition;
 import org.springframework.data.jpa.domain.Specification;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +43,7 @@ public class Filter implements Specification {
             case eq:
                 return buildEqualsPredicateToCriteria(condition, root, criteriaQuery, criteriaBuilder);
             case gt:
-                break;
+                return buildGreaterThanPredicateToCriteria(condition, root, criteriaQuery, criteriaBuilder);
             case lt:
                 break;
             case ne:
@@ -62,6 +59,18 @@ public class Filter implements Specification {
     }
 
     private Predicate buildEqualsPredicateToCriteria(Condition condition, Root root, CriteriaQuery criteriaQuery, CriteriaBuilder criteriaBuilder) {
-        return criteriaBuilder.equal(root.get(condition.field), condition.value);
+        return criteriaBuilder.equal(getPath(root, condition.field), condition.value);
+    }
+
+    private Path getPath(Root root, String attributeName) {
+        Path path = root;
+        for (String part : attributeName.split("\\.")) {
+            path = path.get(part);
+        }
+        return path;
+    }
+
+    private Predicate buildGreaterThanPredicateToCriteria(Condition condition, Root root, CriteriaQuery criteriaQuery, CriteriaBuilder criteriaBuilder) {
+        return criteriaBuilder.greaterThan(getPath(root, condition.field), (Comparable)condition.value);
     }
 }

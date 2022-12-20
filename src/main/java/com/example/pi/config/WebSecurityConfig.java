@@ -50,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(Constants.BASE_API + "/authenticate").permitAll()
                 .antMatchers(Constants.BASE_API + "/user/create").permitAll()
-                .antMatchers(Constants.BASE_API + "/user/**").hasAuthority("ROLE_" + Role.ADMIN.name())
+                //.antMatchers(Constants.BASE_API + "/user/**").hasAuthority("ROLE_" + Role.ADMIN.name())
                 .antMatchers(Constants.BASE_API + "/**").hasAnyAuthority("ROLE_" + Role.ADMIN.name(), "ROLE_" + Role.USER.name())
                 .and().addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
