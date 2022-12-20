@@ -1,7 +1,7 @@
 package com.example.pi.service;
 
 import com.example.pi.entity.UserEntity;
-import com.example.pi.repository.UserRepository;
+import com.example.pi.repository.UserDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private final UserRepository repository;
+    private final UserDao repository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

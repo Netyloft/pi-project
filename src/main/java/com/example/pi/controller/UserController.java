@@ -3,7 +3,7 @@ package com.example.pi.controller;
 import com.example.pi.Constants;
 import com.example.pi.domen.Role;
 import com.example.pi.entity.UserEntity;
-import com.example.pi.repository.UserRepository;
+import com.example.pi.repository.UserDao;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,7 +17,7 @@ import java.util.List;
 @RequestMapping(Constants.BASE_API + "/user")
 public class UserController {
 
-    private final UserRepository repository;
+    private final UserDao repository;
 
     @GetMapping("")
     public List<UserEntity> getAll() {
