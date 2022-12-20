@@ -16,6 +16,7 @@ spring:
       auto-commit: false
     name: PostgresDatasource
   jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     database: postgresql
     hibernate:
       ddl-auto: update  # create-drop / none / validate

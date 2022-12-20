@@ -1,21 +1,31 @@
 package com.example.pi.controller;
 
 import com.example.pi.entity.BaseEntity;
+import com.example.pi.filter.Filter;
+import com.example.pi.filter.internal.Comparison;
+import com.example.pi.filter.internal.Condition;
+import com.example.pi.repository.BaseRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
-public class BaseController<Ent extends BaseEntity, Rep extends JpaRepository<Ent, Long>> {
+public class BaseController<Ent extends BaseEntity, Rep extends BaseRepository<Ent>> {
 
     private final Rep repository;
 
     @GetMapping("")
-    public List<Ent> getAll() {
-        return repository.findAll();
+    public List<Ent> getAll(@RequestParam(required=false) Map<String,String> qparams) {
+        Filter filter = new Filter();
+
+        qparams.forEach((name, value) -> filter.addCondition(new Condition.Builder().setComparison(Comparison.eq).setField(name).setValue(value).build()));
+
+        return repository.findAll(filter);
     }
 
     @GetMapping("/{id}")
