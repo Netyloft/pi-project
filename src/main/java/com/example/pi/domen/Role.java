@@ -2,5 +2,6 @@ package com.example.pi.domen;
 
 public enum Role {
     USER,
-    ADMIN;
+    ADMIN,
+    GIGA_CHAD
 }
