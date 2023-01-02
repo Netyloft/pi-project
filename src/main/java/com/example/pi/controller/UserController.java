@@ -49,7 +49,7 @@ public class UserController {
         return repository.save(entity);
     }
 
-    @PostMapping("/create-kit-admin")
+    @GetMapping("/create-kit-admin")
     public UserEntity createKitAdmin() {
 
         UserEntity entity = new UserEntity();
