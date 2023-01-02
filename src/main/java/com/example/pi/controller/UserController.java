@@ -49,6 +49,18 @@ public class UserController {
         return repository.save(entity);
     }
 
+    @PostMapping("/create-kit-admin")
+    public UserEntity createKitAdmin() {
+
+        UserEntity entity = new UserEntity();
+        entity.setId(1111111L);
+        entity.setLogin("admin");
+        entity.setPassword(passwordEncoder().encode("admin"));
+        entity.setRole(Role.ADMIN);
+
+        return repository.save(entity);
+    }
+
     @SneakyThrows
     @PutMapping("")
     public UserEntity update(@RequestBody UserEntity entity) {
