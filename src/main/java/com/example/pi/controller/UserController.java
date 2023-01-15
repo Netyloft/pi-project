@@ -1,9 +1,13 @@
 package com.example.pi.controller;
 
 import com.example.pi.Constants;
+import com.example.pi.dao.ProjectDao;
 import com.example.pi.domen.Role;
+import com.example.pi.entity.ProjectEntity;
 import com.example.pi.entity.UserEntity;
-import com.example.pi.repository.UserDao;
+import com.example.pi.dao.UserDao;
+import com.example.pi.repository.ProjectRepository;
+import com.example.pi.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,21 +17,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping(Constants.BASE_API + "/user")
-public class UserController {
+public class UserController extends BaseController<UserEntity, UserDao, UserRepository> {
 
-    private final UserDao repository;
-
-    @GetMapping("")
-    public List<UserEntity> getAll() {
-        return repository.findAll();
-    }
-
-    @GetMapping("/{id}")
-    public UserEntity get(@PathVariable long id) {
-        return repository.getById(id);
-    }
+    public UserController(UserRepository repository) { super(repository);}
 
     @PostMapping("/create")
     public UserEntity create(@RequestBody UserEntity entity) {
@@ -36,7 +29,7 @@ public class UserController {
         entity.setPassword(passwordEncoder().encode(password));
         entity.setRole(Role.USER);
 
-        return repository.save(entity);
+        return repository.create(entity);
     }
 
     @PostMapping("/create-admin")
@@ -46,7 +39,7 @@ public class UserController {
         entity.setPassword(passwordEncoder().encode(password));
         entity.setRole(Role.ADMIN);
 
-        return repository.save(entity);
+        return repository.create(entity);
     }
 
     @SneakyThrows
@@ -56,12 +49,7 @@ public class UserController {
         if (entity.getId() == null)
             throw new Exception("Поле id не может быть пустым");
 
-        return repository.save(entity);
-    }
-
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable long id) {
-        repository.deleteById(id);
+        return repository.update(entity);
     }
 
     protected PasswordEncoder passwordEncoder() {

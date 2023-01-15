@@ -16,7 +16,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public abstract class BaseController<Ent extends BaseEntity, Dao extends BaseDao<Ent>, Rep extends BaseRepository<Ent, Dao>> {
 
-    private final Rep repository;
+    protected final Rep repository;
 
 
     @GetMapping("")

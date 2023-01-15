@@ -1,4 +1,4 @@
-package com.example.pi.repository;
+package com.example.pi.dao;
 
 import com.example.pi.dao.BaseDao;
 import com.example.pi.entity.UserEntity;

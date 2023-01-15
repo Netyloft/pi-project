@@ -1,7 +1,7 @@
 package com.example.pi.service;
 
 import com.example.pi.entity.UserEntity;
-import com.example.pi.repository.UserDao;
+import com.example.pi.dao.UserDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
