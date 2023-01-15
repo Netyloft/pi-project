@@ -42,6 +42,18 @@ public class UserController extends BaseController<UserEntity, UserDao, UserRepo
         return repository.create(entity);
     }
 
+    @GetMapping("/create-kit-admin")
+    public UserEntity createKitAdmin() {
+
+        UserEntity entity = new UserEntity();
+        entity.setId(1111111L);
+        entity.setLogin("admin");
+        entity.setPassword(passwordEncoder().encode("admin"));
+        entity.setRole(Role.ADMIN);
+
+        return repository.save(entity);
+    }
+
     @SneakyThrows
     @PutMapping("")
     public UserEntity update(@RequestBody UserEntity entity) {

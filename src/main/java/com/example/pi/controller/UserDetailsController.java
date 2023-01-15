@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(Constants.BASE_API + "/person-details")
+@RequestMapping(Constants.BASE_API + "/user-details")
 public class UserDetailsController extends BaseController<UserDetailsEntity, UserDetailsDao, UserDetailsRepository> {
 
 
