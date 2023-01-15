@@ -51,7 +51,7 @@ public class UserController extends BaseController<UserEntity, UserDao, UserRepo
         entity.setPassword(passwordEncoder().encode("admin"));
         entity.setRole(Role.ADMIN);
 
-        return repository.save(entity);
+        return repository.create(entity);
     }
 
     @SneakyThrows
